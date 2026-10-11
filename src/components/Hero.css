@@ -3,6 +3,9 @@
   --awn-h: calc(36px + var(--s) / 2);
   position: relative;
   overflow: hidden;
+  background:
+    radial-gradient(55% 55% at 82% 38%, rgba(125, 38, 215, 0.3), transparent 70%),
+    radial-gradient(40% 40% at 8% 85%, rgba(125, 38, 215, 0.14), transparent 70%);
 }
 
 @media (min-width: 700px) {
@@ -15,14 +18,14 @@
 .awning-wrap {
   position: relative;
   z-index: 2;
-  filter: drop-shadow(0 3px 0 var(--ink)) drop-shadow(0 14px 14px rgba(12, 26, 61, 0.18));
+  filter: drop-shadow(0 3px 0 rgba(0, 0, 0, 0.6)) drop-shadow(0 12px 26px rgba(125, 38, 215, 0.4));
 }
 
 .awning {
   height: var(--awn-h);
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.16), transparent 45%, rgba(12, 26, 61, 0.14)),
-    repeating-linear-gradient(90deg, var(--cobalt) 0 var(--s), var(--white) var(--s) calc(var(--s) * 2));
+    linear-gradient(180deg, rgba(255, 255, 255, 0.14), transparent 45%, rgba(0, 0, 0, 0.22)),
+    repeating-linear-gradient(90deg, var(--accent) 0 var(--s), var(--silver) var(--s) calc(var(--s) * 2));
   -webkit-mask:
     linear-gradient(#000, #000) top / 100% 36px no-repeat,
     radial-gradient(circle at calc(var(--s) / 2) 0, #000 calc(var(--s) / 2 - 0.5px), transparent calc(var(--s) / 2 + 0.5px)) bottom / var(--s) calc(var(--s) / 2) repeat-x;
@@ -53,7 +56,8 @@
   top: 0;
   width: 2px;
   height: 56px;
-  background: var(--ink);
+  background: var(--silver);
+  opacity: 0.55;
 }
 
 .sign__string:nth-child(1) {
@@ -71,10 +75,11 @@
   align-items: center;
   width: 104px;
   padding: 10px 8px 12px;
-  border: 3px solid var(--sinal);
+  border: 3px solid var(--accent);
   border-radius: 10px;
-  background: var(--ink);
-  color: var(--white);
+  background: var(--surface);
+  box-shadow: 0 0 28px rgba(125, 38, 215, 0.55);
+  color: var(--text);
   text-align: center;
   line-height: 1.15;
 }
@@ -84,7 +89,8 @@
   font-size: 1.45rem;
   font-weight: 800;
   letter-spacing: -0.02em;
-  color: var(--sinal);
+  color: var(--glow);
+  text-shadow: 0 0 14px rgba(189, 96, 252, 0.6);
 }
 
 .sign__board span {
@@ -148,13 +154,18 @@
 
 .line:nth-child(3) > span {
   animation-delay: 0.59s;
+  background: linear-gradient(90deg, var(--silver), var(--glow));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 
 .hero__lede {
   max-width: 34rem;
   margin-top: 28px;
   font-size: clamp(1.1rem, 2.2vw, 1.3rem);
-  color: var(--ink-2);
+  color: var(--text-2);
   animation: fade 0.8s ease-out 0.95s both;
 }
 
@@ -182,7 +193,7 @@
   border-top: 1px solid var(--line);
   max-width: 44rem;
   font-size: 0.95rem;
-  color: var(--ink-2);
+  color: var(--text-2);
   animation: fade 0.8s ease-out 1.15s both;
 }
 
@@ -196,8 +207,38 @@
   content: '';
   width: 8px;
   height: 8px;
-  background: var(--sinal);
-  outline: 1.5px solid var(--ink);
+  background: var(--accent-text);
+  box-shadow: 0 0 10px var(--glow);
+}
+
+/* Símbolo da OrbitWeb como elemento decorativo */
+.hero__orbit {
+  display: none;
+}
+
+@media (min-width: 900px) {
+  .hero__orbit {
+    position: absolute;
+    z-index: 0;
+    display: block;
+    right: max(var(--gutter), calc((100vw - var(--wrap)) / 2));
+    bottom: clamp(24px, 5vw, 72px);
+    width: clamp(260px, 30vw, 440px);
+    height: auto;
+    pointer-events: none;
+    filter: drop-shadow(0 0 40px rgba(125, 38, 215, 0.45));
+    animation: fade 1s ease-out 1.1s both, orbit-float 7s ease-in-out 2s infinite;
+  }
+}
+
+@keyframes orbit-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-14px) rotate(2deg);
+  }
 }
 
 @keyframes awning-drop {

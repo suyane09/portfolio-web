@@ -1,12 +1,20 @@
 :root {
-  --ink: #0c1a3d;
-  --ink-2: #4a5675;
-  --cobalt: #2236e8;
-  --cobalt-dark: #1828b8;
-  --sinal: #ffc72c;
-  --mist: #eff1f5;
-  --white: #ffffff;
-  --line: rgba(12, 26, 61, 0.16);
+  color-scheme: dark;
+
+  /* Paleta OrbitWeb (extraída da logo) */
+  --bg: #07060c;          /* fundo principal (preto da logo) */
+  --bg-alt: #0d0b16;      /* seções alternadas */
+  --surface: #12101d;     /* cards e formulário */
+  --text: #f1eff7;        /* texto principal (prata clara) */
+  --text-2: #aaa5c0;      /* texto secundário */
+  --silver: #e0e0e2;      /* prata da logo */
+  --accent: #7d26d7;      /* roxo da logo (botões, destaques) */
+  --accent-hover: #9440ee;
+  --accent-text: #c08cff; /* roxo claro: links e textos pequenos (contraste AA no fundo escuro) */
+  --glow: #bd60fc;        /* roxo de brilho da logo */
+  --line: rgba(255, 255, 255, 0.12);
+  --line-strong: rgba(255, 255, 255, 0.24);
+  --danger: #ff8f86;
   --wa: #14a44d;
 
   --font-display: 'Bricolage Grotesque Variable', 'Arial Narrow', system-ui, sans-serif;
@@ -39,8 +47,8 @@ body {
   font-family: var(--font-body);
   font-size: 1.0625rem;
   line-height: 1.6;
-  color: var(--ink);
-  background: var(--mist);
+  color: var(--text);
+  background: var(--bg);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -79,7 +87,7 @@ a {
 }
 
 :focus-visible {
-  outline: 3px solid var(--cobalt);
+  outline: 3px solid var(--accent-text);
   outline-offset: 3px;
 }
 
@@ -104,7 +112,7 @@ a {
 .section-head p {
   margin-top: 16px;
   max-width: 56ch;
-  color: var(--ink-2);
+  color: var(--text-2);
 }
 
 .sr-only {
@@ -125,8 +133,8 @@ a {
   top: -80px;
   z-index: 100;
   padding: 10px 16px;
-  background: var(--ink);
-  color: var(--white);
+  background: var(--accent);
+  color: #fff;
   border-radius: 8px;
 }
 
@@ -165,28 +173,31 @@ a {
 }
 
 .btn--primary {
-  background: var(--cobalt);
-  color: var(--white);
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 0 0 rgba(125, 38, 215, 0);
 }
 
 .btn--primary:hover {
-  background: var(--cobalt-dark);
+  background: var(--accent-hover);
+  box-shadow: 0 8px 28px rgba(125, 38, 215, 0.45);
 }
 
 .btn--ghost {
-  border-color: var(--ink);
-  color: var(--ink);
+  border-color: rgba(255, 255, 255, 0.45);
+  color: var(--text);
   background: transparent;
 }
 
 .btn--ghost:hover {
-  background: var(--ink);
-  color: var(--white);
+  background: var(--silver);
+  border-color: var(--silver);
+  color: var(--bg);
 }
 
 .btn--whatsapp {
   background: var(--wa);
-  color: var(--white);
+  color: #fff;
 }
 
 .btn--whatsapp:hover {

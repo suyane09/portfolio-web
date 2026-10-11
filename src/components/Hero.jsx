@@ -21,6 +21,8 @@ export default function Hero() {
         </div>
       </div>
 
+      <img className="hero__orbit" src="/logo-mark-large.png" alt="" width="720" height="720" aria-hidden="true" />
+
       <div className="wrap hero__inner">
         <h1 id="hero-title">
           <span className="line"><span>Seu negócio</span></span>

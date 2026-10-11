@@ -3,9 +3,8 @@
  * Altere aqui e todo o conteúdo se atualiza.
  */
 export const site = {
-  name: 'Orbit Web',
-  descriptor: 'Estúdio digital',
-
+    name: 'OrbitWeb',
+   nameParts: ['Orbit', 'Web'],
   whatsappNumber: '5582982143150',
 
   email: '',
