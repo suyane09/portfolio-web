@@ -221,9 +221,10 @@
     position: absolute;
     z-index: 0;
     display: block;
-    right: max(var(--gutter), calc((100vw - var(--wrap)) / 2));
-    bottom: clamp(24px, 5vw, 72px);
-    width: clamp(260px, 30vw, 440px);
+    right: 0;
+    /* começa na altura da 3ª linha do título, no espaço livre à direita */
+    top: calc(clamp(64px, 8vw, 104px) + clamp(2.1rem, 8.4vw, 5.8rem) * 1.7);
+    width: clamp(240px, 26vw, 380px);
     height: auto;
     pointer-events: none;
     filter: drop-shadow(0 0 40px rgba(125, 38, 215, 0.45));
