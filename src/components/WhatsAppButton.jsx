@@ -1,4 +1,4 @@
-import { whatsappLink } from '../config/site'
+import { whatsappLink, whatsappMessages } from '../config/site'
 import { WhatsAppIcon } from './Icons.jsx'
 import './WhatsAppButton.css'
 
@@ -6,7 +6,7 @@ export default function WhatsAppButton() {
   return (
     <a
       className="wa-float"
-      href={whatsappLink('Olá! Vim pelo site e gostaria de conversar sobre um projeto.')}
+      href={whatsappLink(whatsappMessages.general)}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Falar no WhatsApp (abre em nova aba)"

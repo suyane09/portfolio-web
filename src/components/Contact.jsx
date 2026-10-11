@@ -1,4 +1,4 @@
-import { site, whatsappLink } from '../config/site'
+import { site, whatsappLink, whatsappMessages } from '../config/site'
 import QuoteForm from './QuoteForm.jsx'
 import { WhatsAppIcon } from './Icons.jsx'
 import './Contact.css'
@@ -15,7 +15,7 @@ export default function Contact() {
           </p>
           <a
             className="btn btn--whatsapp"
-            href={whatsappLink('Olá! Vim pelo site e gostaria de conversar sobre um projeto.')}
+            href={whatsappLink(whatsappMessages.general)}
             target="_blank"
             rel="noopener noreferrer"
           >

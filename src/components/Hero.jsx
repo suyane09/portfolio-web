@@ -1,4 +1,4 @@
-import { whatsappLink } from '../config/site'
+import { whatsappLink, whatsappMessages } from '../config/site'
 import './Hero.css'
 
 const kinds = ['Sites institucionais', 'Lojas virtuais', 'Sistemas para restaurantes', 'Páginas de eventos']
@@ -37,9 +37,9 @@ export default function Hero() {
             Solicitar orçamento
           </a>
           <a className="btn btn--ghost" href="#portfolio">
-            Ver exemplos
+            Ver projetos
           </a>
-          <a className="hero__wa" href={whatsappLink('Olá! Vim pelo site e gostaria de conversar sobre um projeto.')} target="_blank" rel="noopener noreferrer">
+          <a className="hero__wa" href={whatsappLink(whatsappMessages.general)} target="_blank" rel="noopener noreferrer">
             ou chame no WhatsApp
           </a>
         </div>

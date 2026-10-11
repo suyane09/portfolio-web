@@ -5,6 +5,7 @@
 export const site = {
     name: 'OrbitWeb',
    nameParts: ['Orbit', 'Web'],
+  descriptor: 'Sites, lojas virtuais e sistemas para pequenos negócios.',
   whatsappNumber: '5582982143150',
 
   email: '',
@@ -16,6 +17,13 @@ export const whatsappLink = (message = '') => {
   const number = site.whatsappNumber.replace(/\D/g, '')
   const text = message ? `?text=${encodeURIComponent(message)}` : ''
   return `https://wa.me/${number}${text}`
+}
+
+/** Mensagens prontas do WhatsApp (uma só fonte para todos os botões). */
+export const whatsappMessages = {
+  general: 'Olá! Vim pelo site da OrbitWeb e gostaria de conversar sobre um projeto.',
+  project: (title) =>
+    `Olá! Vi o site ${title} no portfólio da OrbitWeb e gostaria de um site parecido para o meu negócio. Pode me passar um orçamento?`,
 }
 
 export const nav = [

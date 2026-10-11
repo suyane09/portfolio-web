@@ -1,16 +1,30 @@
 import ProjectArt from './ProjectArt.jsx'
-import { ExternalIcon } from './Icons.jsx'
+import { ExternalIcon, WhatsAppIcon } from './Icons.jsx'
+import { whatsappLink, whatsappMessages } from '../config/site'
 
 export default function ProjectCard({ project }) {
-  const { title, type, description, tags, art, image, imageAlt, url, demo, size } = project
+  const { title, type, description, tags, art, image, imageAlt, url, demo, featured, size } = project
+  const classes = ['card', `card--${size === 'wide' ? 'wide' : 'narrow'}`, featured ? 'card--featured' : '']
+    .filter(Boolean)
+    .join(' ')
+
+  const media = image ? (
+    <img src={image} alt={imageAlt} loading="lazy" decoding="async" width="1400" height="735" />
+  ) : (
+    <ProjectArt kind={art} />
+  )
+
   return (
-    <article className={`card card--${size === 'wide' ? 'wide' : 'narrow'}`}>
+    <article className={classes}>
       <div className="card__media">
-        {image ? (
-          <img src={image} alt={imageAlt} loading="lazy" decoding="async" width="1200" height="750" />
+        {url ? (
+          <a className="card__media-link" href={url} target="_blank" rel="noopener noreferrer" tabIndex={-1} aria-hidden="true">
+            {media}
+          </a>
         ) : (
-          <ProjectArt kind={art} />
+          media
         )}
+        {featured && <span className="card__badge card__badge--featured">Projeto em destaque</span>}
         {demo && <span className="card__badge">Exemplo demonstrativo</span>}
       </div>
       <div className="card__body">
@@ -25,10 +39,21 @@ export default function ProjectCard({ project }) {
           </ul>
         )}
         {url && (
-          <a className="card__link" href={url} target="_blank" rel="noopener noreferrer">
-            Visitar site <ExternalIcon />
-            <span className="sr-only"> (abre em nova aba)</span>
-          </a>
+          <div className="card__actions">
+            <a className="btn btn--primary btn--sm" href={url} target="_blank" rel="noopener noreferrer">
+              Visitar site <ExternalIcon />
+              <span className="sr-only"> {title} (abre em nova aba)</span>
+            </a>
+            <a
+              className="btn btn--ghost btn--sm"
+              href={whatsappLink(whatsappMessages.project(title))}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <WhatsAppIcon width="18" height="18" /> Quero um site assim
+              <span className="sr-only"> (abre o WhatsApp em nova aba)</span>
+            </a>
+          </div>
         )}
       </div>
     </article>
