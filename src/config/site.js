@@ -1,20 +1,16 @@
 /**
- * Dados editáveis do site. Altere aqui e todo o conteúdo se atualiza.
- * Itens marcados com TODO são provisórios e precisam ser trocados antes de divulgar.
+ * Dados editáveis do site.
+ * Altere aqui e todo o conteúdo se atualiza.
  */
 export const site = {
-  name: 'Suyane',
-  descriptor: 'estúdio digital',
+  name: 'Orbit Web',
+  descriptor: 'Estúdio digital',
 
-  // TODO: troque pelo seu número real, só dígitos, com código do país (55) e DDD.
-  // Exemplo: 5582912345678. O valor abaixo é FICTÍCIO.
-  whatsappNumber: '5582900000000',
+  whatsappNumber: '5582982143150',
 
-  // TODO: opcional. Deixe '' para esconder o e-mail do site.
   email: '',
 
-  // TODO: opcional. Ex.: 'https://instagram.com/seu_perfil'. Deixe '' para esconder.
-  instagram: '',
+  instagram: 'https://www.instagram.com/orbitweb_/',
 }
 
 export const whatsappLink = (message = '') => {
