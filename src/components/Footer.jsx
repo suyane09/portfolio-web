@@ -6,7 +6,7 @@ export default function Footer() {
     <footer className="footer">
       <div className="wrap footer__inner">
         <div>
-          <p className="footer__brand">{site.name}</p>
+          <img className="footer__logo" src="/logo.png" alt={site.name} width="900" height="568" loading="lazy" />
           <p className="footer__sub">{site.descriptor}</p>
         </div>
         <nav aria-label="Rodapé">

@@ -1,5 +1,5 @@
 .contact {
-  background: var(--mist);
+  background: var(--bg);
 }
 
 .contact__layout {
@@ -15,7 +15,7 @@
 .contact__intro p {
   margin: 18px 0 28px;
   max-width: 40ch;
-  color: var(--ink-2);
+  color: var(--text-2);
 }
 
 .contact__links {
@@ -40,10 +40,10 @@
 /* Formulário */
 .form {
   padding: clamp(22px, 4vw, 40px);
-  background: var(--white);
-  border: 2px solid var(--ink);
+  background: var(--surface);
+  border: 1.5px solid var(--line-strong);
   border-radius: 16px;
-  box-shadow: 8px 8px 0 var(--sinal);
+  box-shadow: 8px 8px 0 var(--accent);
 }
 
 .form__title {
@@ -75,7 +75,7 @@
 
 .form__opt {
   font-weight: 400;
-  color: var(--ink-2);
+  color: var(--text-2);
 }
 
 .form input,
@@ -83,10 +83,10 @@
 .form textarea {
   width: 100%;
   padding: 13px 14px;
-  border: 2px solid var(--line);
+  border: 2px solid var(--line-strong);
   border-radius: 10px;
-  background: var(--white);
-  color: var(--ink);
+  background: var(--bg);
+  color: var(--text);
   font: inherit;
   transition: border-color 0.15s;
 }
@@ -94,21 +94,21 @@
 .form input:hover,
 .form select:hover,
 .form textarea:hover {
-  border-color: rgba(12, 26, 61, 0.4);
+  border-color: rgba(255, 255, 255, 0.45);
 }
 
 .form input:focus-visible,
 .form select:focus-visible,
 .form textarea:focus-visible {
   outline: none;
-  border-color: var(--cobalt);
-  box-shadow: 0 0 0 3px rgba(34, 54, 232, 0.2);
+  border-color: var(--accent-text);
+  box-shadow: 0 0 0 3px rgba(192, 140, 255, 0.25);
 }
 
 .form select {
   appearance: none;
   padding-right: 40px;
-  background: var(--white) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' fill='none' stroke='%230c1a3d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m1 1.5 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 14px center;
+  background: var(--bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' fill='none' stroke='%23c9c5da' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m1 1.5 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 14px center;
 }
 
 .form textarea {
@@ -117,19 +117,19 @@
 }
 
 .form [aria-invalid='true'] {
-  border-color: #b3261e;
+  border-color: var(--danger);
 }
 
 .form__error {
   margin-top: 6px;
   font-size: 0.9rem;
-  color: #b3261e;
+  color: var(--danger);
 }
 
 .form__note {
   margin-top: 14px;
   font-size: 0.88rem;
-  color: var(--ink-2);
+  color: var(--text-2);
 }
 
 .form__status {
@@ -140,7 +140,8 @@
   margin-top: 16px;
   padding: 12px 14px;
   border-radius: 10px;
-  background: #fff6d9;
+  background: rgba(125, 38, 215, 0.2);
+  border: 1px solid rgba(192, 140, 255, 0.4);
   font-size: 0.95rem;
   animation: pop 0.35s ease-out both;
 }

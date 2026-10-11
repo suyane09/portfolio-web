@@ -1,5 +1,5 @@
 .services {
-  background: var(--white);
+  background: var(--bg-alt);
 }
 
 .services__layout {
@@ -14,16 +14,16 @@
 .services__intro p {
   margin: 16px 0 28px;
   max-width: 34ch;
-  color: var(--ink-2);
+  color: var(--text-2);
 }
 
 .service {
   padding: 28px 0;
-  border-top: 2px solid var(--ink);
+  border-top: 1px solid var(--line-strong);
 }
 
 .service:last-child {
-  border-bottom: 2px solid var(--ink);
+  border-bottom: 1px solid var(--line-strong);
 }
 
 .service h3 {
@@ -33,7 +33,7 @@
 .service > p {
   margin-top: 10px;
   max-width: 52ch;
-  color: var(--ink-2);
+  color: var(--text-2);
 }
 
 .service__items {
@@ -55,7 +55,8 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--cobalt);
+  background: var(--glow);
+  box-shadow: 0 0 10px var(--glow);
 }
 
 @media (min-width: 900px) {
