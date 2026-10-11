@@ -1,0 +1,255 @@
+.hero {
+  --s: 40px;
+  --awn-h: calc(36px + var(--s) / 2);
+  position: relative;
+  overflow: hidden;
+}
+
+@media (min-width: 700px) {
+  .hero {
+    --s: 56px;
+  }
+}
+
+/* Toldo de loja: a marca visual do estúdio */
+.awning-wrap {
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 3px 0 var(--ink)) drop-shadow(0 14px 14px rgba(12, 26, 61, 0.18));
+}
+
+.awning {
+  height: var(--awn-h);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.16), transparent 45%, rgba(12, 26, 61, 0.14)),
+    repeating-linear-gradient(90deg, var(--cobalt) 0 var(--s), var(--white) var(--s) calc(var(--s) * 2));
+  -webkit-mask:
+    linear-gradient(#000, #000) top / 100% 36px no-repeat,
+    radial-gradient(circle at calc(var(--s) / 2) 0, #000 calc(var(--s) / 2 - 0.5px), transparent calc(var(--s) / 2 + 0.5px)) bottom / var(--s) calc(var(--s) / 2) repeat-x;
+  mask:
+    linear-gradient(#000, #000) top / 100% 36px no-repeat,
+    radial-gradient(circle at calc(var(--s) / 2) 0, #000 calc(var(--s) / 2 - 0.5px), transparent calc(var(--s) / 2 + 0.5px)) bottom / var(--s) calc(var(--s) / 2) repeat-x;
+  transform-origin: top;
+  animation: awning-drop 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+/* Placa pendurada */
+.sign {
+  position: absolute;
+  z-index: 1;
+  top: calc(var(--awn-h) - 28px);
+  right: max(var(--gutter), calc((100vw - var(--wrap)) / 2));
+}
+
+.sign__swing {
+  position: relative;
+  padding-top: 44px;
+  transform-origin: 50% 0;
+  animation: sign-swing 2.4s ease-out 0.7s both;
+}
+
+.sign__string {
+  position: absolute;
+  top: 0;
+  width: 2px;
+  height: 56px;
+  background: var(--ink);
+}
+
+.sign__string:nth-child(1) {
+  left: 24%;
+}
+
+.sign__string:nth-child(2) {
+  right: 24%;
+}
+
+.sign__board {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 104px;
+  padding: 10px 8px 12px;
+  border: 3px solid var(--sinal);
+  border-radius: 10px;
+  background: var(--ink);
+  color: var(--white);
+  text-align: center;
+  line-height: 1.15;
+}
+
+.sign__board strong {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--sinal);
+}
+
+.sign__board span {
+  font-size: 0.72rem;
+}
+
+@media (min-width: 700px) {
+  .sign__board {
+    width: 150px;
+    padding: 14px 12px 16px;
+  }
+
+  .sign__board strong {
+    font-size: 2rem;
+  }
+
+  .sign__board span {
+    font-size: 0.85rem;
+  }
+}
+
+.hero__inner {
+  position: relative;
+  z-index: 1;
+  padding-top: 120px;
+  padding-bottom: clamp(64px, 9vw, 128px);
+}
+
+@media (min-width: 700px) {
+  .hero__inner {
+    padding-top: clamp(64px, 8vw, 104px);
+  }
+}
+
+.hero h1 {
+  font-size: clamp(2.1rem, 8.4vw, 5.8rem);
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+  font-weight: 800;
+}
+
+.line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.1em;
+  margin-bottom: -0.1em;
+}
+
+.line > span {
+  display: inline-block;
+  animation: rise 0.85s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.line:nth-child(1) > span {
+  animation-delay: 0.35s;
+}
+
+.line:nth-child(2) > span {
+  animation-delay: 0.47s;
+}
+
+.line:nth-child(3) > span {
+  animation-delay: 0.59s;
+}
+
+.hero__lede {
+  max-width: 34rem;
+  margin-top: 28px;
+  font-size: clamp(1.1rem, 2.2vw, 1.3rem);
+  color: var(--ink-2);
+  animation: fade 0.8s ease-out 0.95s both;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 16px;
+  margin-top: 36px;
+  animation: fade 0.8s ease-out 1.05s both;
+}
+
+.hero__wa {
+  margin-left: 6px;
+  font-weight: 500;
+  text-underline-offset: 4px;
+}
+
+.hero__kinds {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 28px;
+  margin-top: clamp(40px, 6vw, 72px);
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  max-width: 44rem;
+  font-size: 0.95rem;
+  color: var(--ink-2);
+  animation: fade 0.8s ease-out 1.15s both;
+}
+
+.hero__kinds li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hero__kinds li::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: var(--sinal);
+  outline: 1.5px solid var(--ink);
+}
+
+@keyframes awning-drop {
+  0% {
+    transform: scaleY(0.15);
+    opacity: 0.4;
+  }
+  60% {
+    transform: scaleY(1.06);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes sign-swing {
+  0% {
+    transform: rotate(0deg) translateY(-30px);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+    transform: rotate(9deg) translateY(0);
+  }
+  45% {
+    transform: rotate(-5deg);
+  }
+  70% {
+    transform: rotate(2.5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes rise {
+  from {
+    transform: translateY(105%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
