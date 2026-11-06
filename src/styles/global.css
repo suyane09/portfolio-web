@@ -4,3 +4,6 @@
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}.showcase-browser{transform:none}}
 
 .slide-dots button,.slide-actions button{min-height:44px}.round-link:hover .round-icon{box-shadow:0 8px 25px #7745ef30}
+
+/* Original silver and purple brand symbol, without a wordmark. */
+.brand{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;min-width:100px}.brand img{width:120px;height:80px;object-fit:contain;filter:none;opacity:1}.footer .brand img{width:135px;height:90px}@media(max-width:700px){.brand{min-width:85px}.brand img{width:100px;height:67px}.footer .brand img{width:110px;height:74px}}

@@ -16,7 +16,7 @@ const services = [
 ]
 const steps = [ ['Entender','Uma conversa sobre sua marca, seu público e o que você quer alcançar.'], ['Criar','Estrutura, direção visual e desenvolvimento com você acompanhando cada etapa.'], ['Colocar no ar','Revisão no celular e no computador, publicação e orientação para os próximos passos.'] ]
 function Arrow({diagonal = true}) { return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d={diagonal ? 'M5 19 19 5M5 5h14v14' : 'M4 12h16m-6-6 6 6-6 6'} /></svg> }
-function Brand() { return <a href="#inicio" className="brand" aria-label="OrbitWeb, início"><img src="/logo-mark-large.png" width="48" height="48" alt=""/><span>orbit<span className="brand-light">web</span><sup>®</sup></span></a> }
+function Brand() { return <a href="#inicio" className="brand" aria-label="OrbitWeb, início"><img src="/orbit-symbol-purple.png" width="120" height="80" alt="OrbitWeb"/></a> }
 function Reveal({children, className=''}) { const ref = useRef(null); useEffect(()=>{ const el=ref.current; if(!el || !window.IntersectionObserver)return; const io=new IntersectionObserver(([e])=>{if(e.isIntersecting){el.classList.add('revealed');io.disconnect()}},{threshold:.08});io.observe(el);return()=>io.disconnect()},[]); return <div ref={ref} className={`reveal ${className}`}>{children}</div> }
 function Showcase() {
  const [index,setIndex]=useState(0); const [paused,setPaused]=useState(false); const [hovered,setHovered]=useState(false); const [reduced,setReduced]=useState(false); const touch=useRef(null)
