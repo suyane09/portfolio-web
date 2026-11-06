@@ -4,6 +4,7 @@ import { site, whatsappLink, whatsappMessages } from './config/site'
 import QuoteForm from './components/QuoteForm'
 
 const projects = [
+  { id: 'joao-veloso', title: 'João Veloso Personal', type: 'Site para personal trainer · Método VERTEX', image: '/projects/joao-veloso.webp', url: 'https://joaovelosopersonal.vercel.app/', category: 'Fitness', color: '#2b2737' },
   { id: 'albuquerque', title: 'Albuquerque Imports', type: 'Página de links · Varejo', image: '/projects/albuquerque.webp', url: 'https://albuquerqueimports.vercel.app/', category: 'Comércio', color: '#213729' },
   { id: 'sinesios', title: 'Sinesios iPhones', type: 'Página de links · Tecnologia', image: '/projects/sinesios.webp', url: 'https://sinesiosiphone.vercel.app/', category: 'Comércio', color: '#183e4c' },
   ...originalProjects.map((p,i) => ({...p, category: p.id === 'beatriz-reis' ? 'Saúde' : 'Fitness', color: ['#252c30','#332b21','#283323','#3a2735','#444139'][i]}))
