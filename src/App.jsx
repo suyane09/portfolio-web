@@ -1,28 +1,51 @@
-import Header from './components/Header.jsx'
-import Hero from './components/Hero.jsx'
-import Portfolio from './components/Portfolio.jsx'
-import Services from './components/Services.jsx'
-import Process from './components/Process.jsx'
-import Contact from './components/Contact.jsx'
-import Footer from './components/Footer.jsx'
-import WhatsAppButton from './components/WhatsAppButton.jsx'
+import { useEffect, useRef, useState } from 'react'
+import { projects as originalProjects } from './data/projects'
+import { site, whatsappLink, whatsappMessages } from './config/site'
+import QuoteForm from './components/QuoteForm'
 
-export default function App() {
-  return (
-    <>
-      <a className="skip-link" href="#conteudo">
-        Pular para o conteúdo
-      </a>
-      <Header />
-      <main id="conteudo">
-        <Hero />
-        <Portfolio />
-        <Services />
-        <Process />
-        <Contact />
-      </main>
-      <Footer />
-      <WhatsAppButton />
-    </>
-  )
+const projects = [
+  { id: 'albuquerque', title: 'Albuquerque Imports', type: 'Página de links · Varejo', image: '/projects/albuquerque.webp', url: 'https://albuquerqueimports.vercel.app/', category: 'Comércio', color: '#213729' },
+  { id: 'sinesios', title: 'Sinesios iPhones', type: 'Página de links · Tecnologia', image: '/projects/sinesios.webp', url: 'https://sinesiosiphone.vercel.app/', category: 'Comércio', color: '#183e4c' },
+  ...originalProjects.map((p,i) => ({...p, category: p.id === 'beatriz-reis' ? 'Saúde' : 'Fitness', color: ['#252c30','#332b21','#283323','#3a2735','#444139'][i]}))
+]
+const services = [
+ ['01','Sites que posicionam.','Sua marca apresentada com clareza, personalidade e um caminho simples até o primeiro contato.','Institucionais / Landing pages / Link na bio'],
+ ['02','Lojas que conectam.','Uma experiência de compra pensada para seus produtos, seus clientes e a rotina do seu negócio.','Catálogos / Lojas virtuais / WhatsApp'],
+ ['03','Sistemas que simplificam.','Menos tarefas espalhadas. Mais organização com ferramentas construídas para a sua operação.','Cardápios / Pedidos / Gestão / Agendamentos']
+]
+const steps = [ ['Entender','Uma conversa sobre sua marca, seu público e o que você quer alcançar.'], ['Criar','Estrutura, direção visual e desenvolvimento com você acompanhando cada etapa.'], ['Colocar no ar','Revisão no celular e no computador, publicação e orientação para os próximos passos.'] ]
+function Arrow({diagonal = true}) { return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d={diagonal ? 'M5 19 19 5M5 5h14v14' : 'M4 12h16m-6-6 6 6-6 6'} /></svg> }
+function Brand() { return <a href="#inicio" className="brand" aria-label="OrbitWeb, início"><img src="/logo-mark-large.png" width="48" height="48" alt=""/><span>orbit<span className="brand-light">web</span><sup>®</sup></span></a> }
+function Reveal({children, className=''}) { const ref = useRef(null); useEffect(()=>{ const el=ref.current; if(!el || !window.IntersectionObserver)return; const io=new IntersectionObserver(([e])=>{if(e.isIntersecting){el.classList.add('revealed');io.disconnect()}},{threshold:.08});io.observe(el);return()=>io.disconnect()},[]); return <div ref={ref} className={`reveal ${className}`}>{children}</div> }
+function Showcase() {
+ const [index,setIndex]=useState(0); const [paused,setPaused]=useState(false); const [hovered,setHovered]=useState(false); const [reduced,setReduced]=useState(false); const touch=useRef(null)
+ useEffect(()=>{const m=matchMedia('(prefers-reduced-motion: reduce)');const sync=()=>setReduced(m.matches);sync();m.addEventListener('change',sync);return()=>m.removeEventListener('change',sync)},[])
+ useEffect(()=>{if(paused||hovered||reduced)return; const id=setInterval(()=>setIndex(i=>(i+1)%projects.length),4800);return()=>clearInterval(id)},[paused,hovered,reduced])
+ const move=(n)=>setIndex(i=>(i+n+projects.length)%projects.length)
+ const p=projects[index]
+ return <div className="showcase" onMouseEnter={()=>setHovered(true)} onMouseLeave={()=>setHovered(false)} onFocusCapture={()=>setHovered(true)} onBlurCapture={e=>{if(!e.currentTarget.contains(e.relatedTarget))setHovered(false)}} onTouchStart={e=>touch.current=e.touches[0].clientX} onTouchEnd={e=>{if(touch.current!==null){const d=e.changedTouches[0].clientX-touch.current;if(Math.abs(d)>45)move(d<0?1:-1);touch.current=null}}}>
+   <div className="showcase-top"><span><i/> PROJETOS REAIS. MARCAS REAIS.</span><span>SELEÇÃO ORBIT — 2026</span></div>
+   <div className="showcase-stage" style={{'--project-color':p.color}}>
+    <div className="showcase-word" aria-hidden="true">{p.category}</div>
+    <a key={p.id} className="showcase-browser" href={p.url} target="_blank" rel="noopener noreferrer" aria-label={`Visitar ${p.title}`}><div className="browser-bar"><span>● ● ●</span><span>{new URL(p.url).hostname}</span><Arrow/></div><div className="browser-screen"><img src={p.image} alt={`Site ${p.title} desenvolvido pela OrbitWeb`} width="1400" height="960" fetchPriority="high"/></div><span className="visit-bubble"><Arrow/> Explorar projeto</span></a>
+    <div className="showcase-caption" aria-live={paused?'polite':'off'}><div><p>{p.type}</p><h2>{p.title}</h2></div><span>0{index+1} / 0{projects.length}</span></div>
+   </div>
+   <div className="showcase-controls"><div className="slide-dots">{projects.map((p,i)=><button key={p.id} onClick={()=>setIndex(i)} aria-label={`Mostrar ${p.title}`} aria-current={index===i?'true':undefined}><span/></button>)}</div><div className="slide-actions"><button onClick={()=>setPaused(!paused)} aria-label={paused?'Reproduzir projetos':'Pausar projetos'}>{paused?'Reproduzir':'Pausar'} <span aria-hidden="true">{paused?'▷':'Ⅱ'}</span></button><button onClick={()=>move(-1)} aria-label="Projeto anterior">←</button><button onClick={()=>move(1)} aria-label="Próximo projeto">→</button></div></div>
+ </div>
+}
+export default function App(){
+ const [menu,setMenu]=useState(false);const [filter,setFilter]=useState('Todos');const [quote,setQuote]=useState(false)
+ const wa=whatsappLink(whatsappMessages.general)
+ return <>
+ <a className="skip-link" href="#conteudo">Pular para o conteúdo</a>
+ <header className="header"><Brand/><nav id="mobile-links" aria-label="Principal" className={menu?'navigation open':'navigation'}>{[['#portfolio','Projetos'],['#servicos','O que fazemos'],['#sobre','O estúdio']].map(([url,label])=><a key={url} href={url} onClick={()=>setMenu(false)}>{label}</a>)}<a href="#contato" className="nav-contact" onClick={()=>setMenu(false)}>Vamos conversar <Arrow/></a></nav><button className="menu-toggle" onClick={()=>setMenu(!menu)} aria-expanded={menu} aria-controls="mobile-links" aria-label={menu?'Fechar menu':'Abrir menu'}>{menu?'Fechar −':'Menu +'}</button></header>
+ <main id="conteudo">
+ <section className="hero wrap" id="inicio"><div className="eyebrow hero-eyebrow"><span>ESTÚDIO INDEPENDENTE DE DESIGN & TECNOLOGIA</span><span className="hero-location">ALAGOAS, BRASIL ↗</span></div><h1>Seu próximo<br/>nível é <span className="digital">digital<span className="period">.</span><svg viewBox="0 0 600 160" preserveAspectRatio="none" aria-hidden="true"><ellipse cx="300" cy="83" rx="294" ry="63"/></svg></span></h1><div className="hero-bottom"><p>Design que chama atenção.<br/>Tecnologia que faz acontecer.<br/><span>Sites, lojas e sistemas com a sua identidade.</span></p><a className="round-link" href="#contato"><span>Vamos tirar sua<br/>ideia do papel?</span><span className="round-icon"><Arrow/></span></a></div><Showcase/><div className="hero-foot"><span>FEITO SOB MEDIDA. DO INÍCIO AO AR.</span><a href="#portfolio">Explore nossos trabalhos <span>↓</span></a></div></section>
+ <section className="intro wrap" id="sobre"><Reveal><div className="eyebrow"><span>01 / A ÓRBITA DA SUA MARCA</span><span>ESTRATÉGIA + DESIGN + CÓDIGO</span></div><h2>Uma boa presença digital<br/>não passa despercebida.<br/><span>A sua também não precisa passar.</span></h2><div className="intro-bottom"><span className="orbit-symbol" aria-hidden="true">✳</span><p>A OrbitWeb é um estúdio independente liderado por Suyane Cardoso. Transformo ideias em experiências digitais com personalidade, atenção aos detalhes e contato direto em cada etapa.</p><p>Do primeiro site ao sistema que organiza sua empresa, cada projeto parte do que torna o seu negócio único.</p></div></Reveal></section>
+ <section id="portfolio" className="portfolio wrap"><Reveal><div className="eyebrow"><span>02 / TRABALHOS SELECIONADOS</span><span>DESIGN QUE SAIU DO PAPEL</span></div><div className="section-title"><h2>Ideias em<br/><span>movimento.</span></h2><p>Negócios diferentes.<br/>A mesma atenção a cada detalhe.</p></div></Reveal><div className="filters" role="group" aria-label="Filtrar projetos">{['Todos','Fitness','Comércio','Saúde'].map(f=><button key={f} aria-pressed={filter===f} onClick={()=>setFilter(f)}>{f}{f==='Todos'&&<sup>{projects.length.toString().padStart(2,'0')}</sup>}</button>)}</div><div className="project-grid">{projects.filter(p=>filter==='Todos'||p.category===filter).map((p,i)=><Reveal key={p.id} className="project"><a href={p.url} target="_blank" rel="noopener noreferrer" className="project-image" style={{'--project-color':p.color}} aria-label={`Visitar o site ${p.title}`}><div className="project-frame"><div className="mini-browser"><span>● ● ●</span><span>{new URL(p.url).hostname}</span></div><img src={p.image} alt={`Página inicial de ${p.title}`} loading="lazy" width="1400" height="960"/></div><span className="project-open"><Arrow/></span></a><div className="project-info"><div><p>{p.type}</p><h3><a href={p.url} target="_blank" rel="noopener noreferrer">{p.title}</a></h3></div><span>{String(i+1).padStart(2,'0')}</span></div></Reveal>)}</div><a className="text-link" href={wa} target="_blank" rel="noopener noreferrer">Seu projeto pode ser o próximo <Arrow/></a></section>
+ <section id="servicos" className="services"><div className="wrap"><Reveal><div className="eyebrow"><span>03 / O QUE FAZEMOS</span><span>DA IDEIA À EXPERIÊNCIA</span></div><div className="section-title"><h2>Bonito de ver.<br/><span>Simples de usar.</span></h2><p>Uma solução digital precisa impressionar.<br/>E funcionar para o seu negócio.</p></div></Reveal><div className="service-list">{services.map(([n,title,desc,tags])=><Reveal key={n}><details className="service" open={n==='01'}><summary><span className="service-number">{n}</span><h3>{title}</h3><span className="service-plus">+</span></summary><div className="service-description"><p>{desc}</p><span>{tags}</span><a href={whatsappLink(`Olá! Quero saber mais sobre ${title.toLowerCase()}`)} target="_blank" rel="noopener noreferrer">Conversar sobre meu projeto <Arrow/></a></div></details></Reveal>)}</div></div></section>
+ <section id="processo" className="process wrap"><Reveal><div className="eyebrow"><span>04 / COMO ACONTECE</span><span>VOCÊ PARTICIPA. A ORBIT CONSTRÓI.</span></div><div className="section-title"><h2>Próximos em<br/><span>cada etapa.</span></h2><p>Contato direto, decisões claras<br/>e um projeto feito com você.</p></div><div className="steps">{steps.map(([title,desc],i)=><article key={title}><span>0{i+1}<Arrow/></span><h3>{title}</h3><p>{desc}</p></article>)}</div></Reveal></section>
+ <section id="contato" className="contact"><div className="wrap"><div className="eyebrow"><span>05 / O PRÓXIMO PASSO É SEU</span><span><i/> VAMOS CRIAR JUNTOS</span></div><Reveal><p className="contact-kicker">Tem uma ideia? A gente dá forma.</p><a className="contact-title" href={wa} target="_blank" rel="noopener noreferrer">Vamos fazer<br/>acontecer<span>?</span><Arrow/></a><div className="contact-bottom"><p>Conte o que você imagina.<br/>Vamos encontrar o melhor caminho para sua marca.</p><a href={wa} target="_blank" rel="noopener noreferrer" className="pill">Conversar no WhatsApp <Arrow/></a><button className="text-link" onClick={()=>setQuote(!quote)} aria-expanded={quote} aria-controls="quote-form">{quote?'Fechar formulário −':'Prefiro preencher um formulário +'}</button></div>{quote&&<div id="quote-form" className="quote-panel"><QuoteForm/></div>}</Reveal></div></section>
+ </main><footer className="footer wrap"><div className="footer-top"><Brand/><p>Design com intenção.<br/>Tecnologia com propósito.</p><a href={site.instagram} target="_blank" rel="noopener noreferrer">Instagram <Arrow/></a><a href="#inicio">Voltar ao topo ↑</a></div><div className="footer-bottom"><span>© {new Date().getFullYear()} OrbitWeb</span><span>De Alagoas para o seu próximo passo.</span><span>Todos os direitos reservados.</span></div></footer>
+ </>
 }
