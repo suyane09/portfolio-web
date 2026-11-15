@@ -4,6 +4,8 @@ import { site, whatsappLink, whatsappMessages } from './config/site'
 import QuoteForm from './components/QuoteForm'
 
 const projects = [
+  { id: 'procopio-team', title: 'Procópio Team', type: 'Site para nutricionista · Nutrição esportiva', image: '/projects/procopio.jpg', url: 'https://procopioteam.com.br/', category: 'Saúde', color: '#342c1c' },
+  { id: 'imperio-optico', title: 'Império Óptico', type: 'Página de links · Ótica', image: '/projects/imperio-optico.jpg', url: 'https://imperiooptico.vercel.app/', category: 'Comércio', color: '#332d1c' },
   { id: 'joao-veloso', title: 'João Veloso Personal', type: 'Site para personal trainer · Método VERTEX', image: '/projects/joao-veloso.webp', url: 'https://joaovelosopersonal.vercel.app/', category: 'Fitness', color: '#2b2737' },
   { id: 'albuquerque', title: 'Albuquerque Imports', type: 'Página de links · Varejo', image: '/projects/albuquerque-desktop.webp', url: 'https://albuquerqueimports.vercel.app/', category: 'Comércio', color: '#213729' },
   { id: 'sinesios', title: 'Sinesios iPhones', type: 'Página de links · Tecnologia', image: '/projects/sinesios.webp', url: 'https://sinesiosiphone.vercel.app/', category: 'Comércio', color: '#183e4c' },
@@ -29,9 +31,9 @@ function Showcase() {
    <div className="showcase-stage" style={{'--project-color':p.color}}>
     <div className="showcase-word" aria-hidden="true">{p.category}</div>
     <a key={p.id} className="showcase-browser" href={p.url} target="_blank" rel="noopener noreferrer" aria-label={`Visitar ${p.title}`}><div className="browser-bar"><span>● ● ●</span><span>{new URL(p.url).hostname}</span><Arrow/></div><div className="browser-screen"><img src={p.image} alt={`Site ${p.title} desenvolvido pela OrbitWeb`} width="1400" height="960" fetchPriority="high"/></div><span className="visit-bubble"><Arrow/> Explorar projeto</span></a>
-    <div className="showcase-caption" aria-live={paused?'polite':'off'}><div><p>{p.type}</p><h2>{p.title}</h2></div><span>0{index+1} / 0{projects.length}</span></div>
+    <div className="showcase-caption" aria-live={paused?'polite':'off'}><div><p>{p.type}</p><h2>{p.title}</h2></div><span>{String(index+1).padStart(2,'0')} / {String(projects.length).padStart(2,'0')}</span></div>
    </div>
-   <div className="showcase-controls"><div className="slide-dots">{projects.map((p,i)=><button key={p.id} onClick={()=>setIndex(i)} aria-label={`Mostrar ${p.title}`} aria-current={index===i?'true':undefined}><span/></button>)}</div><div className="slide-actions"><button onClick={()=>setPaused(!paused)} aria-label={paused?'Reproduzir projetos':'Pausar projetos'}>{paused?'Reproduzir':'Pausar'} <span aria-hidden="true">{paused?'▷':'Ⅱ'}</span></button><button onClick={()=>move(-1)} aria-label="Projeto anterior">←</button><button onClick={()=>move(1)} aria-label="Próximo projeto">→</button></div></div>
+   <div className="showcase-controls" style={{flexWrap:'wrap'}}><div className="slide-dots">{projects.map((p,i)=><button key={p.id} onClick={()=>setIndex(i)} aria-label={`Mostrar ${p.title}`} aria-current={index===i?'true':undefined}><span/></button>)}</div><div className="slide-actions"><button onClick={()=>setPaused(!paused)} aria-label={paused?'Reproduzir projetos':'Pausar projetos'}>{paused?'Reproduzir':'Pausar'} <span aria-hidden="true">{paused?'▷':'Ⅱ'}</span></button><button onClick={()=>move(-1)} aria-label="Projeto anterior">←</button><button onClick={()=>move(1)} aria-label="Próximo projeto">→</button></div></div>
  </div>
 }
 export default function App(){
